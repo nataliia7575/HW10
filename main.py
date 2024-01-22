@@ -44,7 +44,10 @@ class Record:
     def edit_phone(self, old_phone:str, new_phone:str):
         for phone in self.phones:
             if phone.value == old_phone:
-                phone.value = new_phone
+                if not (new_phone.isdigit() and len(new_phone) == 10):
+                    raise ValueError('Invalid phone number')
+                else:
+                    phone.value = new_phone
                 return
         raise ValueError('Invalid phone number')
 
